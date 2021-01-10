@@ -53,7 +53,8 @@ public class DemoController {
 
     private CurrencyExchangeTransaction translate(CurrencyExchangeTransactionRequest request) throws ParseException {
         DateFormatter df = new DateFormatter("dd-MMM-yy HH:mm:ss");
-        return  new CurrencyExchangeTransaction(request.getUserId(), request.getCurrencyFrom(), request.getCurrencyTo(),
+
+        return  new CurrencyExchangeTransaction(message.getTxId(), request.getUserId(), request.getCurrencyFrom(), request.getCurrencyTo(),
                 request.getAmountSell(),request.getAmountBuy(),request.getRate(),df.parse(request.getTimePlaced(),
                 Locale.US),request.getOriginatingCountry());
     }

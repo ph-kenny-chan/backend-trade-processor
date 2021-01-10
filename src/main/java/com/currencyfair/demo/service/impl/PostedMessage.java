@@ -10,6 +10,13 @@ import java.util.List;
 public class PostedMessage {
 
     private List<CurrencyExchangeTransaction> postedMessage = new ArrayList<>();
+    private int txId = 0;
+
+    public int getTxId(){
+        int returnId = this.txId;
+        this.txId++;
+        return returnId;
+    }
 
     public void addPostedMessage(CurrencyExchangeTransaction currencyExchangeTransaction){
         postedMessage.add(currencyExchangeTransaction);

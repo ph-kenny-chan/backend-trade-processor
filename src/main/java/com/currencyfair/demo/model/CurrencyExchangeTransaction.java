@@ -14,6 +14,7 @@ import java.util.Date;
 @AllArgsConstructor
 
 public class CurrencyExchangeTransaction {
+    private int txId;
     private String userId;
     private String currencyFrom;
     private String currencyTo;
