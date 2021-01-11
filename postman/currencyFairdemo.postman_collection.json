@@ -1,0 +1,145 @@
+{
+	"info": {
+		"_postman_id": "90eb549d-4674-4084-a637-43afeb3c7dd8",
+		"name": "currencyFair Demo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Post Currency Exchange Transaction (GBP)",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"userId\":\"134256\",\r\n\"currencyFrom\":\"EUR\",\r\n\"currencyTo\":\"GBP\",\r\n\"amountSell\":1000,\r\n\"amountBuy\":747.10,\r\n\"rate\":0.747,\r\n\"timePlaced\":\"24-Jan-18 10:27:44\",\r\n\"originatingCountry\":\"FR\"}"
+				},
+				"url": {
+					"raw": "http://localhost:7000/v1/demo/postCurExTx",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7000",
+					"path": [
+						"v1",
+						"demo",
+						"postCurExTx"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post Currency Exchange Transaction (HKD)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"userId\":\"124542\",\r\n\"currencyFrom\":\"HKD\",\r\n\"currencyTo\":\"GBP\",\r\n\"amountSell\":10000,\r\n\"amountBuy\":988.14,\r\n\"rate\":10.12,\r\n\"timePlaced\":\"03-Jan-2021 10:27:44\",\r\n\"originatingCountry\":\"HK\"}"
+				},
+				"url": {
+					"raw": "http://localhost:7000/v1/demo/postCurExTx",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7000",
+					"path": [
+						"v1",
+						"demo",
+						"postCurExTx"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Transaction",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:7000/v1/demo/getTx",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7000",
+					"path": [
+						"v1",
+						"demo",
+						"getTx"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Summary",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:7000/v1/demo/getSummary",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7000",
+					"path": [
+						"v1",
+						"demo",
+						"getSummary"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Latest Tranaction",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:7000/v1/demo/getLatestTx",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7000",
+					"path": [
+						"v1",
+						"demo",
+						"getLatestTx"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
