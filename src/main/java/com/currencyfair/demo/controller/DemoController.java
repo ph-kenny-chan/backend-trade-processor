@@ -3,7 +3,9 @@ package com.currencyfair.demo.controller;
 import com.currencyfair.demo.model.CurrencyExchangeTransaction;
 import com.currencyfair.demo.request.CurrencyExchangeTransactionRequest;
 import com.currencyfair.demo.response.CurrencyExchangeTransactionResponse;
-import com.currencyfair.demo.service.impl.PostedMessage;
+import com.currencyfair.demo.response.LatestCurrencyExchangeTransactionResponse;
+import com.currencyfair.demo.response.SummaryResponse;
+import com.currencyfair.demo.service.PostedMessageService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.datetime.DateFormatter;
@@ -14,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.text.ParseException;
-import java.util.List;
 import java.util.Locale;
 
 @RestController
@@ -23,7 +24,7 @@ import java.util.Locale;
 public class DemoController {
 
     @Autowired
-    PostedMessage message;
+    PostedMessageService postedMessageService;
 
     @GetMapping(value="/healthCheck")
     public String healthCheck(){
@@ -40,21 +41,36 @@ public class DemoController {
         }catch (ParseException pe){
             return new ResponseEntity<>("Wrong Date Format", HttpStatus.BAD_REQUEST);
         }
-        message.addPostedMessage(transaction);
+        postedMessageService.addPostedMessage(transaction);
         return new ResponseEntity<>("Posted Success", HttpStatus.OK);
     }
 
     @GetMapping(value="/getTx", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<CurrencyExchangeTransactionResponse> getTransaction() {
+        log.debug("test");
         CurrencyExchangeTransactionResponse response = new CurrencyExchangeTransactionResponse();
-        response.setData(message.getPostedMessage());
+        response.setData(postedMessageService.getPostedMessage());
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @GetMapping(value="/getLatestTx", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<LatestCurrencyExchangeTransactionResponse> getLatestTransaction() {
+        LatestCurrencyExchangeTransactionResponse response = new LatestCurrencyExchangeTransactionResponse();
+        response.setData(postedMessageService.getLatestTransaction());
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @GetMapping(value="/getSummary", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<SummaryResponse> getSummary() {
+        SummaryResponse response = new SummaryResponse();
+        response.setData(postedMessageService.getSummary());
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     private CurrencyExchangeTransaction translate(CurrencyExchangeTransactionRequest request) throws ParseException {
         DateFormatter df = new DateFormatter("dd-MMM-yy HH:mm:ss");
 
-        return  new CurrencyExchangeTransaction(message.getTxId(), request.getUserId(), request.getCurrencyFrom(), request.getCurrencyTo(),
+        return  new CurrencyExchangeTransaction(postedMessageService.getNextTxId(), request.getUserId(), request.getCurrencyFrom(), request.getCurrencyTo(),
                 request.getAmountSell(),request.getAmountBuy(),request.getRate(),df.parse(request.getTimePlaced(),
                 Locale.US),request.getOriginatingCountry());
     }
