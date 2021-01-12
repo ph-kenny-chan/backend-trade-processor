@@ -48,7 +48,7 @@ public class PostedMessageServiceImpl implements PostedMessageService {
             Map<String, Long> originMap = postedMessage.stream().collect(
                     groupingBy(CurrencyExchangeTransaction::getOriginatingCountry, counting()));
             summaryMap.put("totalTransaction", postedMessage.size());
-            summaryMap.put("originDistribution", originMap);
+            summaryMap.put("originDistribution", originMap.keySet().toString());
         }
         return summaryMap;
     }
