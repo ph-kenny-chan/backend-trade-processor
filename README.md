@@ -1,4 +1,30 @@
-# backend-trade-processor
+# Market Trade Processor in backend
+This backend processor provides services for posting transaction, getting all transaction and the latest one.
+There are four endpoints in the whole services as below.
+
+## Endpoint
+
+### Post Currency Exchange Transaction
+```
+/v1/demo/postCurExTx
+````
+### Get all Transaction
+```
+/v1/demo/getTx
+```
+### Get the latest Transaction
+```
+/v1/demo/getLatestTx
+```
+### Get summary for the transaction
+```
+/v1/demo/getSummary
+
+```
+### Postman Collection is at the project
+```
+/postman/currencyFairdemo.postman_collection.json
+```
 
 ## Build Project
 <code>gradlew build</code>
@@ -14,14 +40,4 @@
 ```
 http://localhost:7000
 ```
-## Endpoint
-```
-1. /v1/demo/postCurExTx
-2. /v1/demo/getTx
-3. /v1/demo/getLatestTx
-4. /v1/demo/getSummary
-```
-Postman Collection is at
-```
-/postman/currencyFairdemo.postman_collection.json
-```
+
