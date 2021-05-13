@@ -1,8 +1,10 @@
 package com.currencyfair.demo.service.impl;
 
 import com.currencyfair.demo.model.CurrencyExchangeTransaction;
+import com.currencyfair.demo.repositories.CurrencyExchangeTransactionRepository;
 import com.currencyfair.demo.service.PostedMessageService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import static java.util.stream.Collectors.counting;
 import static java.util.stream.Collectors.groupingBy;
@@ -16,17 +18,13 @@ import java.util.Map;
 @Service
 public class PostedMessageServiceImpl implements PostedMessageService {
 
+    @Autowired
+    CurrencyExchangeTransactionRepository currencyExchangeTransactionRepository;
     private List<CurrencyExchangeTransaction> postedMessage = new ArrayList<>();
-    private int txId = 0;
-
-    public int getNextTxId(){
-        int returnId = this.txId;
-        this.txId++;
-        return returnId;
-    }
 
     public void addPostedMessage(CurrencyExchangeTransaction currencyExchangeTransaction){
-        postedMessage.add(currencyExchangeTransaction);
+        CurrencyExchangeTransaction savedEntity = currencyExchangeTransactionRepository.save(currencyExchangeTransaction);
+        postedMessage.add(savedEntity);
     }
 
     public List<CurrencyExchangeTransaction> getPostedMessage(){
